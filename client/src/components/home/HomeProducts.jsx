@@ -40,7 +40,7 @@ const products = [
   },
 ];
 
-const HomeProducts = () => {
+const HomeProducts = ({ locationData }) => {
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,7 +51,7 @@ const HomeProducts = () => {
               Our Products
             </h4>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
-              Advanced Stroboscope Solutions
+              Advanced Stroboscope Solutions{locationData ? ` in ${locationData.name}` : ''}
             </h2>
             <p className="mt-4 text-lg text-gray-900 max-w-2xl">
               A wide range of high-performance stroboscopes designed for visual inspection of high-speed moving and rotating parts in printing and industrial processes.
@@ -98,14 +98,14 @@ const HomeProducts = () => {
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover/link:text-blue-600 transition-colors">
-                  {product.title}
+                  {product.title}{locationData ? ` in ${locationData.name}` : ''}
                 </h3>
               </a>
               <p className="text-gray-900 text-sm mb-6 flex-grow">
                 {product.description}
               </p>
               <Link
-                to={product.link}
+                to={locationData ? `/${locationData.slug}${product.link.replace('/products', '')}` : product.link}
                 className="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors mt-auto"
               >
                 View Details

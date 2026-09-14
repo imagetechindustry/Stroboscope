@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HomeAbout = () => {
+const HomeAbout = ({ locationData }) => {
   return (
     <section className="py-8 lg:py-12 pb-24 lg:pb-32 bg-gray-50 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,11 +76,11 @@ const HomeAbout = () => {
               About ImageTech Industries
             </h4>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
-              Your Trusted Stroboscope Supplier in India
+              Your Trusted Stroboscope Supplier in {locationData ? locationData.name : 'India'}
             </h2>
             <p className="text-lg text-gray-900 mb-8 leading-relaxed ">
               Based in Delhi, ImageTech Industries is recognized for supplying
-              the best stroboscopes in India for the printing, packaging, and
+              the best stroboscopes in {locationData ? `${locationData.name}, ${locationData.state}` : 'India'} for the printing, packaging, and
               industrial sectors. With an unwavering focus on quality and
               innovation, we deliver high-performance inspection devices that enhance
               production precision, reduce downtime, and provide long-term value

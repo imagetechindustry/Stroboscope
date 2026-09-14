@@ -8,4 +8,13 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    proxy: {
+      '/sitemap.xml': {
+        target: 'https://imagetech-server.onrender.com',
+        changeOrigin: true,
+        rewrite: () => '/sitemap.xml?domain=stroboscopelight.com',
+      },
+    },
+  },
 })

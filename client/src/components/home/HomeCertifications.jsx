@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HomeCertifications = () => {
+const HomeCertifications = ({ locationData }) => {
   return (
     <section className="relative bg-white overflow-hidden">
       {/* Background Split */}

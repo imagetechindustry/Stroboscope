@@ -38,7 +38,7 @@ const faqData = [
 
 import { SchemaInjector } from "../common/SEO";
 
-const HomeFAQ = () => {
+const HomeFAQ = ({ locationData }) => {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -56,7 +56,7 @@ const HomeFAQ = () => {
     <>
       <SchemaInjector schema={faqSchema} />
       <FAQSection
-        title="Everything You Need To Know About Stroboscopes"
+        title={`Everything You Need To Know About Stroboscopes${locationData ? ' in ' + locationData.name : ''}`}
         subtitle="Frequently Asked Questions"
         description="Find answers to common questions about our industrial products, applications, manufacturing capabilities, and technical support."
         faqs={faqData}

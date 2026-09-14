@@ -9,6 +9,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "Certifications", href: "/certifications" },
+    { name: "Sitemap", href: "/sitemap" },
     { name: "Contact Us", href: "/contact" },
   ];
 
@@ -24,7 +25,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <a
-              href="https://www.imagetechindustries.com/"
+              href="https://www.imagetechindustries.com"
               className="flex items-center"
             >
               <img
@@ -36,7 +37,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center space-x-1 lg:space-x-2">
+          <div className="hidden sm:flex items-center space-x-1 lg:space-x-2">
             {navLinks.map((link, index) =>
               link.external ? (
                 <a
@@ -61,7 +62,7 @@ const Navbar = () => {
           </div>
 
           {/* Right Actions */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6">
             <button
               onClick={() =>
                 window.dispatchEvent(new CustomEvent("open-quote-modal"))
@@ -86,7 +87,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center">
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-900 hover:text-gray-900 focus:outline-none p-2"
@@ -120,7 +121,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden border-t border-gray-100 bg-white absolute w-full">
+        <div className="md:hidden border-t border-gray-100 bg-white absolute w-full">
           <div className="px-4 pt-2 pb-6 space-y-1 shadow-lg">
             {navLinks.map((link, index) =>
               link.external ? (
