@@ -23,7 +23,7 @@ const ProductDetail = () => {
     "@context": "https://schema.org/",
     "@type": "Product",
     name: product.name,
-    image: `https://stroboscopelight.com${product.images[0]}`,
+    image: `https://www.stroboscopelight.com${product.images[0]}`,
     description: product.shortDescription,
     brand: {
       "@type": "Brand",

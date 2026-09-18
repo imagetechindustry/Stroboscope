@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <a
-                href="https://stroboscopelight.com"
+                href="https://www.stroboscopelight.com"
                 className="flex items-center gap-2"
               >
                 <img

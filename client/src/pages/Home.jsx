@@ -14,8 +14,8 @@ const Home = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "ImageTech Industries",
-    "url": "https://stroboscopelight.com/",
-    "logo": "https://stroboscopelight.com/logo.png",
+    "url": "https://www.stroboscopelight.com/",
+    "logo": "https://www.stroboscopelight.com/logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+91-9811000000",
@@ -34,7 +34,7 @@ const Home = () => {
     "@context": "https://schema.org/",
     "@type": "Product",
     "name": "Stroboscopes",
-    "image": "https://stroboscopelight.com/heroimage.webp",
+    "image": "https://www.stroboscopelight.com/heroimage.webp",
     "description": "The best stroboscope in Delhi, India. Premium LED Handheld and Xenon Flash Tube stroboscopes for printing and industrial inspection.",
     "brand": {
       "@type": "Brand",

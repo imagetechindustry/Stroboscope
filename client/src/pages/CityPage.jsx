@@ -133,8 +133,8 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "ImageTech Industries",
-    "url": "https://stroboscopelight.com/",
-    "logo": "https://stroboscopelight.com/logo.png",
+    "url": "https://www.stroboscopelight.com/",
+    "logo": "https://www.stroboscopelight.com/logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+91-8448336036",
@@ -154,7 +154,7 @@ const CityPage = () => {
     "@context": "https://schema.org/",
     "@type": "Product",
     "name": "Stroboscopes",
-    "image": "https://stroboscopelight.com/heroimage.webp",
+    "image": "https://www.stroboscopelight.com/heroimage.webp",
     "description": `Premium Stroboscopes available in ${locName}, ${locState}. Designed for visual inspection without stopping your machine.`,
     "brand": {
       "@type": "Brand",

@@ -208,7 +208,7 @@ export default function QuoteModal() {
       sourceWebsite:
         typeof window !== "undefined"
           ? window.location.hostname.replace(/^www\./, "")
-          : "stroboscopelight.com",
+          : "www.stroboscopelight.com",
     };
 
     try {
