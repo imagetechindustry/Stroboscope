@@ -44,12 +44,29 @@ const Home = () => {
   const productSchema = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": "Stroboscopes",
+    "name": "Industrial Stroboscopes",
     "image": "https://www.stroboscopelight.com/heroimage.webp",
     "description": "LED handheld, Xenon flash tube and U-tube fixed stroboscopes for printing, packaging and web inspection manufactured by ImageTech Industries.",
     "brand": {
       "@type": "Brand",
       "name": "ImageTech Industries"
+    },
+    "sku": "ITI-STROBO-SERIES",
+    "mpn": "ITI-STROBOSCOPE-2026",
+    "offers": {
+      "@type": "AggregateOffer",
+      "url": "https://www.stroboscopelight.com/",
+      "priceCurrency": "INR",
+      "lowPrice": "9500",
+      "highPrice": "85000",
+      "offerCount": "4",
+      "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "ImageTech Industries"
+      }
     }
   };
 

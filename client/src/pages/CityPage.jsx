@@ -153,14 +153,31 @@ const CityPage = () => {
   const productSchema = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": "Stroboscopes",
+    "name": `Stroboscopes in ${locName}`,
     "image": "https://www.stroboscopelight.com/heroimage.webp",
     "description": `Premium Stroboscopes available in ${locName}, ${locState}. Designed for visual inspection without stopping your machine.`,
     "brand": {
       "@type": "Brand",
       "name": "ImageTech Industries"
     },
-    "areaServed": locName
+    "sku": `ITI-STROBO-${locationSlug.toUpperCase()}`,
+    "mpn": `ITI-STROBO-${locationSlug.toUpperCase()}`,
+    "areaServed": locName,
+    "offers": {
+      "@type": "AggregateOffer",
+      "url": `https://www.stroboscopelight.com/${locationSlug}`,
+      "priceCurrency": "INR",
+      "lowPrice": "9500",
+      "highPrice": "85000",
+      "offerCount": "4",
+      "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "ImageTech Industries"
+      }
+    }
   };
 
   return (

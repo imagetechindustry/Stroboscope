@@ -19,6 +19,15 @@ const ProductDetail = () => {
     return <Navigate to="/" replace />;
   }
 
+  const productPriceMap = {
+    "led-handheld-stroboscope": { price: "12500", sku: "ITI-LED-HAND-01" },
+    "led-handheld-stroboscope-with-lens": { price: "15500", sku: "ITI-LED-LENS-02" },
+    "xenon-flash-tube-hand-held-stroboscope": { price: "14000", sku: "ITI-XENON-HAND-03" },
+    "u-tube-fixed-model-stroboscope": { lowPrice: "28000", highPrice: "75000", offerCount: "4", sku: "ITI-UTUBE-FIXED-04" },
+  };
+
+  const currentPriceInfo = productPriceMap[product.slug] || { price: "12500", sku: `ITI-${product.id}` };
+
   const productSchema = {
     "@context": "https://schema.org/",
     "@type": "Product",
@@ -29,6 +38,37 @@ const ProductDetail = () => {
       "@type": "Brand",
       name: "ImageTech Industries",
     },
+    sku: currentPriceInfo.sku,
+    mpn: currentPriceInfo.sku,
+    offers: currentPriceInfo.lowPrice
+      ? {
+          "@type": "AggregateOffer",
+          url: `https://www.stroboscopelight.com/products/${product.slug}`,
+          priceCurrency: "INR",
+          lowPrice: currentPriceInfo.lowPrice,
+          highPrice: currentPriceInfo.highPrice,
+          offerCount: currentPriceInfo.offerCount,
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          seller: {
+            "@type": "Organization",
+            name: "ImageTech Industries",
+          },
+        }
+      : {
+          "@type": "Offer",
+          url: `https://www.stroboscopelight.com/products/${product.slug}`,
+          priceCurrency: "INR",
+          price: currentPriceInfo.price,
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          seller: {
+            "@type": "Organization",
+            name: "ImageTech Industries",
+          },
+        },
   };
 
   const faqSchema = {
