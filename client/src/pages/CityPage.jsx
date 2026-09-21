@@ -166,8 +166,8 @@ const CityPage = () => {
   return (
     <>
       <SEO
-        title={`Stroboscope Light in ${locName} | Best Price & Manufacturer`}
-        description={`Looking for stroboscope light in ${locName}, ${locState}? ImageTech Industries manufactures premium LED & Xenon stroboscope instruments at the best price in India.`}
+        title={`Stroboscope Light in ${locName} | Get Strobo scope light in ${locState} at Best Price & Manufacturer`}
+        description={`Looking for stroboscope light in ${locName}, ${locState}? ImageTech Industries manufactures best quality  LED & Xenon stroboscope instruments at the best price in India.`}
         keywords={[
           `Stroboscope light price in ${locName}`,
           `Stroboscope in ${locName}`,

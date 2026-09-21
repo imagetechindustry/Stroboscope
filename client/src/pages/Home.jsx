@@ -7,6 +7,10 @@ import HomeCertifications from "../components/home/HomeCertifications";
 import HomeWhyChoose from "../components/home/HomeWhyChoose";
 import HomeFAQ from "../components/home/HomeFAQ";
 import HomeCTA from "../components/home/HomeCTA";
+import HomeSelectionCalculator from "../components/home/HomeSelectionCalculator";
+import HomeWorkingPrinciple from "../components/home/HomeWorkingPrinciple";
+import HomePressApplications from "../components/home/HomePressApplications";
+import HomeTroubleshootingFinder from "../components/home/HomeTroubleshootingFinder";
 import SEO from "../components/common/SEO";
 
 const Home = () => {
@@ -51,8 +55,8 @@ const Home = () => {
 
   return (
     <>
-      <SEO 
-        title="Stroboscope Light Manufacturer in India | Best LED Strobe Price"
+      <SEO
+        title="Stroboscope Light Manufacturer in India | Get Strobo scope light at Best Price & Manufacturer |LED &amp; Xenon Strobe Lights Strobe "
         description="Buy industrial stroboscope light instruments at best price in India from manufacturer ImageTech Industries. ISO 9001 certified LED, Xenon & U-tube strobes since 1992."
         keywords={[
           'stroboscope light price',
@@ -76,6 +80,10 @@ const Home = () => {
         <HomeAbout />
         <HomeCertifications />
         <HomeWhyChoose />
+        <HomeSelectionCalculator />
+        <HomeWorkingPrinciple />
+        <HomePressApplications />
+        <HomeTroubleshootingFinder />
         <HomeFAQ />
         <HomeCTA />
       </main>

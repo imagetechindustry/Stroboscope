@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+const technicalGuides = [
+  { name: "Selection & Sizing Guide", href: "/selection-guide", desc: "Interactive formula calculator & sizing matrix" },
+  { name: "Working Principle & Physics", href: "/working-principle", desc: "Persistence of vision & harmonic trap" },
+  { name: "Press & Industrial Applications", href: "/press-applications", desc: "Flexo, gravure, slitting & converting" },
+  { name: "Defect Troubleshooting Guide", href: "/troubleshooting-guide", desc: "Visual Quick-Finder & maintenance SOP" },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [guidesOpen, setGuidesOpen] = useState(false);
+  const [mobileGuidesOpen, setMobileGuidesOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -17,6 +26,8 @@ const Navbar = () => {
     if (href === "/") return location.pathname === "/";
     return location.pathname.startsWith(href) || location.hash === href;
   };
+
+  const isGuidesActive = technicalGuides.some((g) => location.pathname === g.href);
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -38,27 +49,90 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <div className="hidden sm:flex items-center space-x-1 lg:space-x-2">
-            {navLinks.map((link, index) =>
-              link.external ? (
-                <a
-                  key={index}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors text-gray-900 font-bold hover:text-blue-600"
+            <Link
+              to="/"
+              className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/about") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
+            >
+              About Us
+            </Link>
+            <Link
+              to="/certifications"
+              className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/certifications") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
+            >
+              Certifications
+            </Link>
+
+            {/* Technical Guides Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setGuidesOpen(true)}
+              onMouseLeave={() => setGuidesOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setGuidesOpen(!guidesOpen)}
+                className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
+                  isGuidesActive
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-900 font-bold hover:text-blue-600"
+                }`}
+              >
+                <span>Technical Guides</span>
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${guidesOpen ? "rotate-180 text-blue-600" : "text-gray-500"}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
                 >
-                  {link.name}
-                </a>
-              ) : (
-                <Link
-                  key={index}
-                  to={link.href}
-                  className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive(link.href) ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
-                >
-                  {link.name}
-                </Link>
-              ),
-            )}
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {guidesOpen && (
+                <div className="absolute top-full left-0 w-80 bg-white rounded-2xl shadow-xl border border-slate-200 py-3 z-50 animate-fadeIn">
+                  <div className="px-4 py-1.5 text-[10px] font-extrabold uppercase tracking-widest text-blue-600 border-b border-slate-100 mb-1">
+                    Engineering Knowledge Suite
+                  </div>
+                  {technicalGuides.map((guide, idx) => (
+                    <Link
+                      key={idx}
+                      to={guide.href}
+                      onClick={() => setGuidesOpen(false)}
+                      className={`block px-4 py-2.5 hover:bg-blue-50 transition-colors ${
+                        location.pathname === guide.href ? "bg-blue-50/70" : ""
+                      }`}
+                    >
+                      <div className="text-sm font-bold text-slate-900 hover:text-blue-600">
+                        {guide.name}
+                      </div>
+                      <div className="text-[11px] text-slate-500 line-clamp-1">
+                        {guide.desc}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="/sitemap"
+              className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/sitemap") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
+            >
+              Sitemap
+            </Link>
+            <Link
+              to="/contact"
+              className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/contact") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
+            >
+              Contact Us
+            </Link>
           </div>
 
           {/* Right Actions */}
@@ -123,33 +197,86 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden border-t border-gray-100 bg-white absolute w-full">
           <div className="px-4 pt-2 pb-6 space-y-1 shadow-lg">
-            {navLinks.map((link, index) =>
-              link.external ? (
-                <a
-                  key={index}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsOpen(false)}
-                  className="block px-3 py-3 rounded-md text-base font-semibold text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"
+            <Link
+              to="/"
+              onClick={() => setIsOpen(false)}
+              className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              onClick={() => setIsOpen(false)}
+              className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/about") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
+            >
+              About Us
+            </Link>
+            <Link
+              to="/certifications"
+              onClick={() => setIsOpen(false)}
+              className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/certifications") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
+            >
+              Certifications
+            </Link>
+
+            {/* Mobile Technical Guides Accordion */}
+            <div className="border-y border-slate-100 py-1">
+              <button
+                type="button"
+                onClick={() => setMobileGuidesOpen(!mobileGuidesOpen)}
+                className="w-full flex justify-between items-center px-3 py-3 rounded-md text-base font-bold text-gray-900 hover:text-blue-600 hover:bg-gray-50"
+              >
+                <span className={isGuidesActive ? "text-blue-600 font-black" : ""}>
+                  Technical Guides
+                </span>
+                <svg
+                  className={`w-4 h-4 transition-transform duration-200 ${mobileGuidesOpen ? "rotate-180 text-blue-600" : "text-gray-500"}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
                 >
-                  <div className="flex justify-between items-center">
-                    {link.name}
-                  </div>
-                </a>
-              ) : (
-                <Link
-                  key={index}
-                  to={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive(link.href) ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
-                >
-                  <div className="flex justify-between items-center">
-                    {link.name}
-                  </div>
-                </Link>
-              ),
-            )}
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {mobileGuidesOpen && (
+                <div className="pl-4 pr-2 pb-2 space-y-1">
+                  {technicalGuides.map((guide, idx) => (
+                    <Link
+                      key={idx}
+                      to={guide.href}
+                      onClick={() => {
+                        setIsOpen(false);
+                        setMobileGuidesOpen(false);
+                      }}
+                      className={`block px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+                        location.pathname === guide.href
+                          ? "bg-blue-50 text-blue-600 font-bold"
+                          : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
+                      }`}
+                    >
+                      {guide.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="/sitemap"
+              onClick={() => setIsOpen(false)}
+              className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/sitemap") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
+            >
+              Sitemap
+            </Link>
+            <Link
+              to="/contact"
+              onClick={() => setIsOpen(false)}
+              className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/contact") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
+            >
+              Contact Us
+            </Link>
             <div className="pt-4 mt-2 border-t border-gray-100">
               <button
                 onClick={() => {

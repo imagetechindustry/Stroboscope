@@ -54,6 +54,18 @@ const faqData = [
     question: "How does a stroboscope sensor synchronization work?",
     answer: "Fixed and advanced industrial stroboscopes connect to external proximity sensors or photo-reflective sensors mounted on machine rollers. When the machine speeds up or slows down, the sensor sends trigger pulses that automatically synchronize the strobe flash rate to the machine speed in real time.",
   },
+  {
+    question: "How do I choose between LED and Xenon stroboscopes?",
+    answer: "Choose LED stroboscopes for cordless battery runtime (6–8 hours), light weight, cool running temperature, and zero bulb maintenance. Choose Xenon flash tube stroboscopes when you need razor-sharp microsecond pulse intensity to freeze ultra-fast moving metallic foil or reflective plastic films without edge blur.",
+  },
+  {
+    question: "How do stroboscopes prevent scrap on gravure and flexo printing presses?",
+    answer: "Without a stroboscope, doctor blade drag lines, plate lifting, or registration drift often continue undetected until hundreds of metres of film have been printed and wound onto the reel. A stroboscope freezes the running web in real time, allowing press operators to catch and fix defects within seconds.",
+  },
+  {
+    question: "Can stroboscopes be safely used for non-contact tachometer RPM testing?",
+    answer: "Yes. Stroboscopes measure the rotational speed of motors, fans, blowers, and spinning shafts from 60 RPM to 99,999 RPM from a safe distance outside machine guards, eliminating the hazards associated with physical contact tachometers.",
+  },
 ];
 
 import { SchemaInjector } from "../common/SEO";

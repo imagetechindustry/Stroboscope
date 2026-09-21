@@ -14,6 +14,10 @@ import TermsConditions from "./pages/TermsConditions";
 import ShippingPolicy from "./pages/ShippingPolicy";
 import ProductDetail from "./pages/ProductDetail";
 import Sitemap from "./pages/Sitemap";
+import SelectionGuide from "./pages/SelectionGuide";
+import WorkingPrinciple from "./pages/WorkingPrinciple";
+import PressApplications from "./pages/PressApplications";
+import TroubleshootingGuide from "./pages/TroubleshootingGuide";
 import CityPage from "./pages/CityPage";
 import CityProductPage from "./pages/CityProductPage";
 import Navbar from "./components/layout/Navbar";
@@ -125,6 +129,46 @@ function App() {
             element={
               <PublicLayout>
                 <ProductDetail />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/selection-guide"
+            element={
+              <PublicLayout>
+                <SelectionGuide />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/working-principle"
+            element={
+              <PublicLayout>
+                <WorkingPrinciple />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/press-applications"
+            element={
+              <PublicLayout>
+                <PressApplications />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/stroboscope-applications"
+            element={
+              <PublicLayout>
+                <PressApplications />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/troubleshooting-guide"
+            element={
+              <PublicLayout>
+                <TroubleshootingGuide />
               </PublicLayout>
             }
           />
