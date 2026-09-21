@@ -22,12 +22,12 @@ const HomeHero = ({ locationData }) => {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight">
               Best <span className="text-blue-600">Stroboscope</span> <br />
               <span className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-gray-900 font-bold">
-                Supplier in {locationData ? locationData.name : 'India'}
+                Manufacturer in {locationData ? locationData.name : 'India'}
               </span>
             </h1>
 
             <p className="text-lg text-gray-900 max-w-xl">
-              ImageTech Industries is widely recognized for supplying the best
+              ImageTech Industries is widely recognized for manufacturing the best
               stroboscopes in {locationData ? `${locationData.name}, ${locationData.state}` : 'Delhi and across India'}. We offer premium
               LED Handheld, Xenon Flash Tube, and U Tube Fixed stroboscopes that
               ensure clear visual inspection without stopping your machine for printing

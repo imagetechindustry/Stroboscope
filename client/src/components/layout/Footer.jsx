@@ -25,12 +25,15 @@ const Footer = () => {
               Your Satisfaction is our Priority
             </p>
             <p className="text-sm text-gray-900 mb-6 leading-relaxed font-medium">
-              We are a leading supplier of high-quality stroboscopes for the visual inspection of high-speed moving and rotating parts in printing, packaging, and industrial applications. Our commitment to quality, innovation, and customer satisfaction drives everything we do.
+              We are a leading manufacturer of high-quality stroboscopes for the visual inspection of high-speed moving and rotating parts in printing, packaging, and industrial applications. Our commitment to quality, innovation, and customer satisfaction drives everything we do.
             </p>
             <div className="flex space-x-3">
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/imagetech-industries/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow ImageTech Industries on LinkedIn"
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-blue-600 hover:text-white transition-colors"
               >
                 <svg
@@ -43,7 +46,10 @@ const Footer = () => {
               </a>
               {/* Facebook */}
               <a
-                href="#"
+                href="https://www.facebook.com/ImageTechIndustries"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow ImageTech Industries on Facebook"
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-blue-600 hover:text-white transition-colors"
               >
                 <svg
@@ -56,7 +62,10 @@ const Footer = () => {
               </a>
               {/* YouTube */}
               <a
-                href="#"
+                href="https://www.youtube.com/@ImageTechIndustries"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Subscribe to ImageTech Industries on YouTube"
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-blue-600 hover:text-white transition-colors"
               >
                 <svg
@@ -69,7 +78,10 @@ const Footer = () => {
               </a>
               {/* Instagram */}
               <a
-                href="#"
+                href="https://www.instagram.com/imagetechindustries/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow ImageTech Industries on Instagram"
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-blue-600 hover:text-white transition-colors"
               >
                 <svg

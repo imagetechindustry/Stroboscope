@@ -194,21 +194,22 @@ const CityProductPage = () => {
   return (
     <>
       <SEO
-        title={`${product.name} in ${location.name}, ${location.state} | ImageTech Industries`}
-        description={`Looking for ${product.name} in ${location.name}, ${location.state}? ImageTech Industries manufactures and supplies high-performance Stroboscopes with fast delivery.`}
+        title={`${product.name} in ${location.name} | Best Price & Manufacturer`}
+        description={`Buy ${product.name} in ${location.name}, ${location.state} at best manufacturer price from ImageTech Industries. Precision industrial stroboscope light instrument.`}
         image={
           images[0]?.startsWith("http")
             ? images[0]
             : `https://www.stroboscopelight.com${images[0]}`
         }
         keywords={[
+          `${product.name} price in ${location.name}`,
           `${product.name} in ${location.name}`,
-          `${product.name} supplier ${location.name}`,
+          `Stroboscope light price in ${location.name}`,
+          `Stroboscope instrument ${location.name}`,
+          `Best stroboscope light ${location.name}`,
           `${product.name} manufacturer ${location.state}`,
-          `Stroboscope ${location.name}`,
-          `Stroboscopes ${location.name}`,
-          `Stroboscopes ${location.state}`,
           product.name,
+          "Stroboscope light price in India",
           "ImageTech Industries",
         ]}
         schema={[productSchema, faqSchema]}

@@ -50,8 +50,8 @@ Whether you are in the printing industry, packaging, coating, or any manufacturi
       { question: "Is the stroboscope portable and easy to carry?", answer: "Yes, its lightweight, handheld, and battery-operated design makes it highly portable across the factory floor." },
       { question: "Where can this stroboscope be used?", answer: "It can be used in printing, packaging, converting, coating, laminating, and general industrial maintenance applications." }
     ],
-    metaTitle: "LED Handheld Stroboscope | Portable Inspection Device | ImageTech",
-    metaDescription: "Buy the best LED Handheld Model Stroboscope. A portable, rechargeable battery-operated device for inspecting high-speed rotating parts without stopping the machine."
+    metaTitle: "LED Stroboscope Light | Handheld RPM Strobe Price in India",
+    metaDescription: "Buy high-performance LED stroboscope light at best price in India. Digital handheld strobe instrument for RPM measurement, tachometer speed testing & printing inspection."
   },
   {
     id: "led-handheld-stroboscope-lens",
@@ -104,8 +104,8 @@ If you are looking for the ultimate tool to ensure flawless quality control in y
       { question: "Is this stroboscope portable?", answer: "Yes, its compact, handheld, and battery-powered design ensures it is very easy to carry around the production floor." },
       { question: "Where can this stroboscope be used?", answer: "It is widely used in printing, packaging, label making, converting, and other industrial environments requiring high-precision inspection." }
     ],
-    metaTitle: "LED Handheld Stroboscope with Lens | Focused Inspection | ImageTech",
-    metaDescription: "Inspect high-speed machinery with precision using our LED Handheld Stroboscope with Lens. Portable, rechargeable, and designed for focused visual inspection."
+    metaTitle: "LED Stroboscope with Lens | Precision Inspection Instrument Price",
+    metaDescription: "Precision LED stroboscope instrument with built-in magnifying lens. Industrial uses for print registration & rotating machinery inspection. Check specs & price in India."
   },
   {
     id: "xenon-flash-tube-stroboscope",
@@ -157,8 +157,8 @@ Widely used in printing, packaging, converting, and heavy industrial application
       { question: "Is it useful for printing machine inspection?", answer: "Yes, it is highly effective for inspecting print registration, color overlap, and web movement on high-speed presses." },
       { question: "Who can use a hand held stroboscope?", answer: "It is designed to be easily used by machine operators, maintenance engineers, and quality control personnel." }
     ],
-    metaTitle: "Xenon Flash Tube Hand Held Stroboscope | ImageTech",
-    metaDescription: "Get crystal-clear inspection with the Xenon Flash Tube Hand Held Stroboscope. Uses high-intensity Xenon flashes for blur-free viewing of high-speed machinery."
+    metaTitle: "Xenon Stroboscope Light | Flash Tube Bulb & Instrument Price",
+    metaDescription: "Portable Xenon stroboscope light with replaceable high-intensity flash tube bulb. Learn working principle, motion freeze uses & get best manufacturer price in India."
   },
   {
     id: "u-tube-fixed-stroboscope",
@@ -217,7 +217,7 @@ If you operate wide-web flexographic presses, rotogravure machines, or continuou
       { question: "Where is this fixed stroboscope used?", answer: "It is widely used in printing presses, packaging lines, coating facilities, and converting plants that require continuous, full-width web inspection." },
       { question: "Can I select the model according to my machine web width?", answer: "Yes, you should choose the model that best matches the width of your machine's web to ensure complete, edge-to-edge illumination." }
     ],
-    metaTitle: "U Tube Fixed Model Stroboscope | Continuous Web Inspection",
-    metaDescription: "Automate your quality control with the U Tube Fixed Model Stroboscope. A machine-mounted solution for continuous, hands-free wide-web inspection."
+    metaTitle: "U Tube Stroboscope Light | Fixed Sensor Sync Web Inspection Price",
+    metaDescription: "Machine-mounted U-tube stroboscope light instrument with auto sensor speed synchronization for printing & converting. Wide-web motion analysis at direct factory price."
   }
 ];

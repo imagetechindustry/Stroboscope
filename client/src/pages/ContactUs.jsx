@@ -37,8 +37,8 @@ const ContactUs = () => {
     <>
       <SEO
         title="Contact Us | ImageTech Industries"
-        description="Get in touch with ImageTech Industries. We are the leading supplier of stroboscopes in Delhi, India. Contact us for sales, support, and custom inquiries."
-        keywords={['contact imagetech industries', 'stroboscope supplier contact', 'buy stroboscope in delhi', 'inspection device inquiries']}
+        description="Contact ImageTech Industries for stroboscope light price, product quotes & technical support in India. Direct manufacturer of LED & Xenon stroboscope instruments."
+        keywords={['stroboscope light price', 'stroboscope light price in india', 'stroboscope instrument price', 'contact imagetech industries', 'buy stroboscope in delhi']}
         schema={contactSchema}
       />
       <div className="flex flex-col min-h-screen">

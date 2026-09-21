@@ -75,7 +75,9 @@ const HomeIndustries = ({ locationData }) => {
             </div>
 
             <a
-              href="#"
+              href="https://www.imagetechindustries.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors"
             >
               Explore All Industries

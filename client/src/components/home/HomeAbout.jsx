@@ -76,10 +76,10 @@ const HomeAbout = ({ locationData }) => {
               About ImageTech Industries
             </h4>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
-              Your Trusted Stroboscope Supplier in {locationData ? locationData.name : 'India'}
+              Your Trusted Stroboscope Manufacturer in {locationData ? locationData.name : 'India'}
             </h2>
             <p className="text-lg text-gray-900 mb-8 leading-relaxed ">
-              Based in Delhi, ImageTech Industries is recognized for supplying
+              Based in Delhi, ImageTech Industries is recognized for manufacturing
               the best stroboscopes in {locationData ? `${locationData.name}, ${locationData.state}` : 'India'} for the printing, packaging, and
               industrial sectors. With an unwavering focus on quality and
               innovation, we deliver high-performance inspection devices that enhance

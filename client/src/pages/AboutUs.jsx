@@ -29,8 +29,8 @@ const AboutUs = () => {
     <>
       <SEO 
         title="About Us | ImageTech Industries"
-        description="Learn about ImageTech Industries, a trusted supplier of Stroboscopes in Delhi, India. Discover our history, manufacturing capabilities, and global presence."
-        keywords={['about imagetech industries', 'stroboscope supplier history', 'best stroboscope in delhi', 'inspection device supplier']}
+        description="Learn about ImageTech Industries, a trusted manufacturer of industrial stroboscope light instruments in India. Discover our history, manufacturing capabilities & global presence."
+        keywords={['about imagetech industries', 'stroboscope manufacturer in india', 'stroboscope light instruments', 'stroboscope uses', 'best stroboscope light']}
         schema={aboutSchema}
       />
       <main>

@@ -32,7 +32,7 @@ const HomeWhyChoose = ({ locationData }) => {
             Why Choose ImageTech Industries
           </h4>
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
-            The Best Stroboscope Supplier in {locationData ? locationData.name : 'Delhi'}
+            The Best Stroboscope Manufacturer in {locationData ? locationData.name : 'Delhi'}
           </h2>
         </div>
 

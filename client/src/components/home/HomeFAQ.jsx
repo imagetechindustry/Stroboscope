@@ -34,6 +34,26 @@ const faqData = [
     question: "What is the U Tube Fixed Model Stroboscope?",
     answer: "The U Tube Fixed Model Stroboscope is a machine-mounted inspection system designed for continuous web inspection and synchronization in printing and packaging machines. It offers both automatic and manual synchronization.",
   },
+  {
+    question: "What is the working principle of a stroboscope light instrument?",
+    answer: "A stroboscope operates on the principle of persistence of vision and optical synchronization. By emitting regular, high-frequency bursts of light matching the rotational speed (RPM) or cycle rate of moving equipment, the object appears stationary to the human eye, enabling real-time visual inspection and speed diagnosis without stopping the machine.",
+  },
+  {
+    question: "What are the common uses of an industrial stroboscope?",
+    answer: "Industrial stroboscopes are used for: (1) Measuring RPM and vibration of motors, fans, shafts, and gearboxes non-contact; (2) Inspecting print registration, ink bleeding, and dot quality on rotogravure and flexo printing presses; (3) Monitoring continuous moving webs, packaging films, and converting machines; (4) Diagnostic inspection to spot belt slippage and damaged teeth.",
+  },
+  {
+    question: "What is the price of a stroboscope light in India?",
+    answer: "Stroboscope light prices in India depend on the light source (LED vs Xenon), battery portability, flash rate range, and whether the system is handheld or machine-mounted. Handheld battery-operated LED stroboscopes are highly economical, while heavy-duty U-tube synchronized systems are built for wide industrial presses. Contact ImageTech Industries for best manufacturer price quotes.",
+  },
+  {
+    question: "Can Xenon stroboscope light bulbs or flash tubes be replaced?",
+    answer: "Yes, portable Xenon stroboscopes utilize replaceable xenon flash tube bulbs. ImageTech Industries supplies original, long-life replacement Xenon tubes and lamp assemblies ensuring your inspection equipment remains operational without costly downtime.",
+  },
+  {
+    question: "How does a stroboscope sensor synchronization work?",
+    answer: "Fixed and advanced industrial stroboscopes connect to external proximity sensors or photo-reflective sensors mounted on machine rollers. When the machine speeds up or slows down, the sensor sends trigger pulses that automatically synchronize the strobe flash rate to the machine speed in real time.",
+  },
 ];
 
 import { SchemaInjector } from "../common/SEO";

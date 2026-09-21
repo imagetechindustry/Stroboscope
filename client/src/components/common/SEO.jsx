@@ -22,13 +22,14 @@ export default function SEO({
   keywords,
   schema,
   noindex = false,
+  skipSuffix = false,
 }) {
   const location = useLocation();
 
-  // Avoid duplicate brand suffix if title already contains or ends with site name
+  // Avoid duplicate brand suffix if title already contains site name, has pipe '|', or skipSuffix is true
   const fullTitle = !title
     ? name
-    : title === name || title.includes(name) || title.includes('ImageTech')
+    : skipSuffix || title === name || title.includes(name) || title.includes('ImageTech') || title.includes('|')
       ? title
       : `${title} | ${name}`;
 

@@ -42,24 +42,31 @@ const Home = () => {
     "@type": "Product",
     "name": "Stroboscopes",
     "image": "https://www.stroboscopelight.com/heroimage.webp",
-    "description": "The best stroboscope in Delhi, India. Premium LED Handheld and Xenon Flash Tube stroboscopes for printing and industrial inspection.",
+    "description": "LED handheld, Xenon flash tube and U-tube fixed stroboscopes for printing, packaging and web inspection manufactured by ImageTech Industries.",
     "brand": {
       "@type": "Brand",
       "name": "ImageTech Industries"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "120"
     }
   };
 
   return (
     <>
       <SEO 
-        title="Best Stroboscope in Delhi, India | ImageTech Industries"
-        description="Looking for the best stroboscope in Delhi, India? ImageTech Industries supplies premium LED Handheld, Xenon Flash Tube, and U Tube Fixed stroboscopes for flawless inspection."
-        keywords={['best stroboscope in delhi', 'best stroboscope in india', 'stroboscope supplier', 'led stroboscope', 'xenon stroboscope']}
+        title="Stroboscope Light Manufacturer in India | Best LED Strobe Price"
+        description="Buy industrial stroboscope light instruments at best price in India from manufacturer ImageTech Industries. ISO 9001 certified LED, Xenon & U-tube strobes since 1992."
+        keywords={[
+          'stroboscope light price',
+          'stroboscope light price in india',
+          'stroboscope instrument',
+          'stroboscope light led',
+          'best stroboscope light',
+          'stroboscope uses',
+          'stroboscope light bulb',
+          'stroboscope manufacturer in india',
+          'stroboscope working principle',
+          'stroboscope price',
+          'strobo scope'
+        ]}
         schema={[orgSchema, productSchema]}
       />
       <main className="flex flex-col">
