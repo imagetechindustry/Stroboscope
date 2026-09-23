@@ -16,8 +16,8 @@ const ShippingPolicy = () => {
 
   return (
     <>
-      <SEO 
-        title="Shipping & Delivery Policy | ImageTech Industries"
+      <SEO
+        title="Shipping & Delivery Policy | Stroboscope Manufacturing Company in India | ImageTech Industries"
         description="Learn about the shipping and delivery policy at ImageTech Industries. We ship precision stroboscopes and industrial products domestically within India and internationally."
         schema={shippingSchema}
       />

@@ -16,8 +16,8 @@ const TermsConditions = () => {
 
   return (
     <>
-      <SEO 
-        title="Terms and Conditions | ImageTech Industries"
+      <SEO
+        title="Terms and Conditions | Stroboscope Supplier, Manufacturer | ImageTech Industries"
         description="Terms and conditions for using ImageTech Industries website and services. Learn about our policies regarding stroboscope orders, intellectual property, and more."
         schema={termsSchema}
       />

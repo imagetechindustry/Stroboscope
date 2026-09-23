@@ -99,7 +99,7 @@ export default function TroubleshootingGuide() {
     <>
       <SEO
         title="Stroboscope Troubleshooting Guide | Printing Defect Quick-Finder"
-        description="Comprehensive stroboscope troubleshooting guide. Diagnose doctor blade lines, print register drift, web flutter, and gear chatter with our Visual Quick-Finder and daily SOP."
+        description="Comprehensive stroboscope troubleshooting guide. Get expert solutions to common problems and diagnose stroboscope issues, print register drift, web flutter, and gear chatter with our Visual Quick-Finder and daily SOP."
         keywords={[
           "stroboscope troubleshooting",
           "stroboscope not flashing",

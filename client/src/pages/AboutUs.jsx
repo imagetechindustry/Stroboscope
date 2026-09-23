@@ -27,8 +27,8 @@ const AboutUs = () => {
 
   return (
     <>
-      <SEO 
-        title="About Us | ImageTech Industries"
+      <SEO
+        title="About Us | Stroboscope Light Supplier, Manufacturer & Exporter in India | ImageTech Industries"
         description="Learn about ImageTech Industries, a trusted manufacturer of industrial stroboscope light instruments in India. Discover our history, manufacturing capabilities & global presence."
         keywords={['about imagetech industries', 'stroboscope manufacturer in india', 'stroboscope light instruments', 'stroboscope uses', 'best stroboscope light']}
         schema={aboutSchema}

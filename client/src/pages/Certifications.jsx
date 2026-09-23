@@ -21,8 +21,8 @@ const Certifications = () => {
 
   return (
     <>
-      <SEO 
-        title="ISO 9001:2015 Certifications | ImageTech Industries"
+      <SEO
+        title="ISO 9001:2015 Certifications | Stroboscope Light, Manufacturer & Exporter in India | ImageTech Industries"
         description="ImageTech Industries is an ISO 9001:2015 certified supplier of high-quality stroboscopes. View our certifications and commitment to global standards."
         keywords={['ISO 9001 certified supplier', 'stroboscope quality standard', 'imagetech industries certification', 'stroboscope supply standards']}
         schema={certSchema}

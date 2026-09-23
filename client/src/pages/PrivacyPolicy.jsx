@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
   return (
     <>
       <SEO
-        title="Privacy Policy | ImageTech Industries"
+        title="Privacy Policy | Stroboscope Manufacturer, Exporter in India | ImageTech Industries"
         description="Privacy policy for ImageTech Industries. Read how we handle and protect your personal information."
         schema={privacySchema}
       />

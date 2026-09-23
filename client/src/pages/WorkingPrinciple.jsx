@@ -73,8 +73,8 @@ export default function WorkingPrinciple() {
   return (
     <>
       <SEO
-        title="Stroboscope Working Principle | How Strobo Scope Lights Freeze Motion"
-        description="Learn the physics and working principle of stroboscopes. Master persistence of vision, harmonic frequency 1x/2x traps, and real-time pressroom motion freezing."
+        title="Stroboscope Working Principle | How Strobo Scope Lights work know everything | ImageTech Industries"
+        description="Learn the stroboscope working principle. know everything about stroboscope working principle, flash duration, persistence of vision, harmonic frequency 1x/2x traps, and real-time pressroom motion freezing."
         keywords={[
           "stroboscope working principle",
           "how does a stroboscope work",

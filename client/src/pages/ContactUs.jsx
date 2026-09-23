@@ -36,7 +36,7 @@ const ContactUs = () => {
   return (
     <>
       <SEO
-        title="Contact Us | ImageTech Industries"
+        title="Contact Us | Stroboscope Light Price, Product Quotes, Technical Support | ImageTech Industries"
         description="Contact ImageTech Industries for stroboscope light price, product quotes & technical support in India. Direct manufacturer of LED & Xenon stroboscope instruments."
         keywords={['stroboscope light price', 'stroboscope light price in india', 'stroboscope instrument price', 'contact imagetech industries', 'buy stroboscope in delhi']}
         schema={contactSchema}
