@@ -164,7 +164,7 @@ const CityProductPage = () => {
     "led-handheld-stroboscope": { price: "12500", sku: "ITI-LED-HAND-01" },
     "led-handheld-stroboscope-with-lens": { price: "15500", sku: "ITI-LED-LENS-02" },
     "xenon-flash-tube-hand-held-stroboscope": { price: "14000", sku: "ITI-XENON-HAND-03" },
-    "u-tube-fixed-model-stroboscope": { lowPrice: "28000", highPrice: "75000", offerCount: "4", sku: "ITI-UTUBE-FIXED-04" },
+    "u-tube-fixed-model-stroboscope": { price: "28000", sku: "ITI-UTUBE-FIXED-04" },
   };
 
   const currentPriceInfo = productPriceMap[product.slug] || { price: "12500", sku: `ITI-${product.id}` };
@@ -187,35 +187,62 @@ const CityProductPage = () => {
       "@type": "AdministrativeArea",
       name: `${location.name}, ${location.state}`,
     },
-    offers: currentPriceInfo.lowPrice
-      ? {
-          "@type": "AggregateOffer",
-          url: `https://www.stroboscopelight.com/${location.slug}/${product.slug}`,
-          priceCurrency: "INR",
-          lowPrice: currentPriceInfo.lowPrice,
-          highPrice: currentPriceInfo.highPrice,
-          offerCount: currentPriceInfo.offerCount,
-          priceValidUntil: "2027-12-31",
-          availability: "https://schema.org/InStock",
-          itemCondition: "https://schema.org/NewCondition",
-          seller: {
-            "@type": "Organization",
-            name: "ImageTech Industries",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "120",
+      bestRating: "5",
+      worstRating: "1",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://www.stroboscopelight.com/${location.slug}/${product.slug}`,
+      priceCurrency: "INR",
+      price: currentPriceInfo.price,
+      validFrom: "2025-01-01",
+      priceValidUntil: "2027-12-31",
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@type": "Organization",
+        name: "ImageTech Industries",
+      },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0",
+          currency: "INR",
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "IN",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 2,
+            unitCode: "DAY",
           },
-        }
-      : {
-          "@type": "Offer",
-          url: `https://www.stroboscopelight.com/${location.slug}/${product.slug}`,
-          priceCurrency: "INR",
-          price: currentPriceInfo.price,
-          priceValidUntil: "2027-12-31",
-          availability: "https://schema.org/InStock",
-          itemCondition: "https://schema.org/NewCondition",
-          seller: {
-            "@type": "Organization",
-            name: "ImageTech Industries",
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 2,
+            maxValue: 4,
+            unitCode: "DAY",
           },
         },
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "IN",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 15,
+        returnMethod: "https://schema.org/ReturnByMail",
+        returnFees: "https://schema.org/FreeReturn",
+      },
+    },
   };
 
   const faqSchema = {

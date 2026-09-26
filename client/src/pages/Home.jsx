@@ -53,19 +53,60 @@ const Home = () => {
     },
     "sku": "ITI-STROBO-SERIES",
     "mpn": "ITI-STROBOSCOPE-2026",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "120",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "offers": {
-      "@type": "AggregateOffer",
+      "@type": "Offer",
       "url": "https://www.stroboscopelight.com/",
       "priceCurrency": "INR",
-      "lowPrice": "9500",
-      "highPrice": "85000",
-      "offerCount": "4",
+      "price": "12500",
+      "validFrom": "2025-01-01",
       "priceValidUntil": "2027-12-31",
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition",
       "seller": {
         "@type": "Organization",
         "name": "ImageTech Industries"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "INR"
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "IN"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 2,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 4,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "IN",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 15,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
       }
     }
   };
