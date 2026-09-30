@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { useLocations, usePrefetchLocation } from "../services/api";
+import { useLocations, usePrefetchLocation, useProducts, usePrefetchProduct } from "../services/api";
 import SEO from "../components/common/SEO";
 
 const SitemapSkeleton = () => (
@@ -39,6 +39,8 @@ const Sitemap = () => {
   }, []);
 
   const { data: locations = [], isLoading } = useLocations();
+  const { data: products = [] } = useProducts("stroboscopes");
+  const prefetchProduct = usePrefetchProduct();
 
   // Instant filter by city, state, or slug
   const filteredLocations = useMemo(() => {
@@ -180,6 +182,46 @@ const Sitemap = () => {
             )}
           </div>
         )}
+
+        {/* Stroboscope Products Catalog */}
+        <div className="mb-12 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-50 to-white border-b border-blue-100 px-6 py-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-slate-900">Stroboscope Instruments & Models</h2>
+              <p className="text-xs text-slate-500 mt-0.5">High-speed inspection products manufactured by ImageTech Industries</p>
+            </div>
+            <a
+              href="https://www.imagetechindustries.com/products?category=stroboscopes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 bg-white hover:bg-blue-50 rounded-full px-3 py-1 text-xs font-bold border border-blue-100 shadow-sm transition-colors"
+            >
+              View on ImageTech &rarr;
+            </a>
+          </div>
+          <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {products.map((prod) => (
+              <Link
+                key={prod.id || prod.slug}
+                to={`/products/${prod.slug}`}
+                onMouseEnter={() => prefetchProduct(prod.slug)}
+                className="group flex flex-col justify-between bg-white border border-gray-200 hover:border-blue-500 text-gray-800 hover:text-blue-700 font-medium p-4 rounded-xl transition-all duration-300 hover:shadow-md"
+              >
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    {prod.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                    {prod.shortDesc}
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-blue-600 mt-3 flex items-center gap-1">
+                  View Specification &rarr;
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
 
         {/* Technical Guides & Engineering Resources Section */}
         <div className="mb-12 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">

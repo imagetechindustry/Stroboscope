@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useLocation as useLocationQuery } from "../services/api";
-import { productsData } from "../data/product";
+import { useLocation as useLocationQuery, useProduct, useProducts, usePrefetchProduct } from "../services/api";
 import SEO from "../components/common/SEO";
 import NotFound from "../components/common/NotFound";
 import FAQSection from "../components/common/FAQSection";
@@ -83,18 +82,30 @@ const CityProductPage = () => {
     setActiveImage(0);
   }, [locationSlug, productSlug]);
 
-  const baseProduct = productsData.find((p) => p.slug === productSlug);
-  const invalid = isInvalidSlug(locationSlug) || !baseProduct;
+  const invalid = isInvalidSlug(locationSlug) || isInvalidSlug(productSlug);
+
+  const {
+    data: product,
+    isLoading: isProductLoading,
+    isError: isProductError,
+    error: productError,
+  } = useProduct(productSlug, { enabled: !invalid });
 
   const {
     data: location,
-    isLoading,
-    isError,
-    error,
+    isLoading: isLocationLoading,
+    isError: isLocationError,
+    error: locationError,
     refetch,
   } = useLocationQuery(locationSlug, { enabled: !invalid });
 
-  if (invalid || (isError && error?.status === 404)) {
+  const { data: allProducts = [] } = useProducts("stroboscopes");
+  const prefetchProduct = usePrefetchProduct();
+
+  const isLoading = isLocationLoading || isProductLoading;
+  const isError = isLocationError || isProductError;
+
+  if (invalid || (isError && (locationError?.status === 404 || productError?.status === 404))) {
     return (
       <NotFound
         title="Product or Location Not Found"
@@ -127,7 +138,7 @@ const CityProductPage = () => {
     );
   }
 
-  if (!location || !location.isActive) {
+  if (!location || !location.isActive || !product) {
     return (
       <NotFound
         title="Product or Location Not Found"
@@ -136,12 +147,10 @@ const CityProductPage = () => {
     );
   }
 
-  const product = baseProduct;
-
   const images =
     product.images && product.images.length > 0
-      ? product.images
-      : [product.image];
+      ? product.images.filter(Boolean)
+      : ["https://www.stroboscopelight.com/heroimage.webp"];
 
   // Dynamic city-specific FAQs combined with base product FAQs
   const combinedFaqs = [
@@ -161,13 +170,18 @@ const CityProductPage = () => {
   ];
 
   const productPriceMap = {
-    "led-handheld-stroboscope": { price: "12500", sku: "ITI-LED-HAND-01" },
-    "led-handheld-stroboscope-with-lens": { price: "15500", sku: "ITI-LED-LENS-02" },
+    "led-handheld-model-stroboscope": { price: "12500", sku: "ITI-LED-HAND-01" },
+    "led-handheld-model-stroboscope-with-lens": { price: "15500", sku: "ITI-LED-LENS-02" },
     "xenon-flash-tube-hand-held-stroboscope": { price: "14000", sku: "ITI-XENON-HAND-03" },
     "u-tube-fixed-model-stroboscope": { price: "28000", sku: "ITI-UTUBE-FIXED-04" },
+    "xenon-flash-tube-for-stroboscope": { price: "4500", sku: "ITI-XENON-TUBE-05" },
+    "led-fix-model-stroboscope-iti-400": { price: "32000", sku: "ITI-FIX-400-06" },
   };
 
-  const currentPriceInfo = productPriceMap[product.slug] || { price: "12500", sku: `ITI-${product.id}` };
+  const currentPriceInfo = productPriceMap[product.slug] || {
+    price: "12500",
+    sku: `ITI-${(product.slug || "STROBO").toUpperCase()}`,
+  };
 
   const productSchema = {
     "@context": "https://schema.org/",
@@ -190,7 +204,7 @@ const CityProductPage = () => {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.9",
-      reviewCount: "120",
+      reviewCount: "130",
       bestRating: "5",
       worstRating: "1",
     },
@@ -245,17 +259,45 @@ const CityProductPage = () => {
     },
   };
 
-  const faqSchema = {
+  const faqSchema =
+    combinedFaqs && combinedFaqs.length > 0
+      ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: combinedFaqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
+      : null;
+
+  const breadcrumbSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: combinedFaqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.stroboscopelight.com/",
       },
-    })),
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: location.name,
+        item: `https://www.stroboscopelight.com/${location.slug}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `${product.name} in ${location.name}`,
+        item: `https://www.stroboscopelight.com/${location.slug}/${product.slug}`,
+      },
+    ],
   };
 
   return (
@@ -279,7 +321,7 @@ const CityProductPage = () => {
           "Stroboscope light price in India",
           "ImageTech Industries",
         ]}
-        schema={[productSchema, faqSchema]}
+        schema={[productSchema, faqSchema, breadcrumbSchema].filter(Boolean)}
       />
 
       <div className="bg-slate-50 min-h-screen py-4 lg:py-8">
@@ -320,11 +362,10 @@ const CityProductPage = () => {
                     <button
                       key={idx}
                       onClick={() => setActiveImage(idx)}
-                      className={`border-2 rounded-lg overflow-hidden aspect-square bg-gray-50 p-2 flex items-center justify-center transition-all ${
-                        activeImage === idx
-                          ? "border-blue-600 shadow-md scale-105"
-                          : "border-gray-200 hover:border-blue-300 opacity-70 hover:opacity-100"
-                      }`}
+                      className={`border-2 rounded-lg overflow-hidden aspect-square bg-gray-50 p-2 flex items-center justify-center transition-all ${activeImage === idx
+                        ? "border-blue-600 shadow-md scale-105"
+                        : "border-gray-200 hover:border-blue-300 opacity-70 hover:opacity-100"
+                        }`}
                     >
                       <img
                         src={img}
@@ -643,6 +684,64 @@ const CityProductPage = () => {
               faqs={combinedFaqs}
             />
           </div>
+
+          {/* Related Products in City */}
+          {allProducts.filter((p) => p.slug !== product.slug).length > 0 && (
+            <div className="mb-16">
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h3 className="text-2xl font-extrabold text-gray-900">
+                    Other Stroboscopes in {location.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Supplied directly by ImageTech Industries with expedited delivery
+                  </p>
+                </div>
+                <Link
+                  to={`/${location.slug}`}
+                  className="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                >
+                  View All in {location.name} &rarr;
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {allProducts
+                  .filter((p) => p.slug !== product.slug)
+                  .slice(0, 4)
+                  .map((p) => (
+                    <div
+                      key={p.id || p.slug}
+                      className="bg-white rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow flex flex-col"
+                    >
+                      <div className="h-44 bg-gray-50 border-b border-gray-100 p-4 flex items-center justify-center">
+                        <img
+                          src={(p.images && p.images[0]) || "https://www.stroboscopelight.com/heroimage.webp"}
+                          alt={`${p.title} in ${location.name}`}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="p-5 flex flex-col flex-grow">
+                        <h4 className="font-bold text-sm text-gray-900 leading-snug mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                          {p.title}
+                        </h4>
+                        <div className="mt-auto pt-2">
+                          <Link
+                            to={`/${location.slug}/${p.slug}`}
+                            onMouseEnter={() => prefetchProduct(p.slug)}
+                            className="w-full bg-[#0f172a] hover:bg-blue-600 text-white py-2 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                          >
+                            VIEW DETAILS &rarr;
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
 
           <HomeCTA locationData={location} />
         </div>

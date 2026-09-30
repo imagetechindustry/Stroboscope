@@ -1,6 +1,8 @@
 import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const IMAGETECH_API_URL =
+  import.meta.env.VITE_IMAGETECH_API_URL || 'https://api.imagetechindustries.com/api';
 
 /* ═══════════════════════════════════════════════════════════════════════════
    1. CORE HTTP FETCH FUNCTIONS
@@ -309,6 +311,191 @@ export const deleteSubmission = async (token, id) => {
   return res.json();
 };
 
+/* ── Product API Functions (ImageTech Backend) ── */
+
+/**
+ * Helper to strip HTML tags from a string
+ */
+const stripHtml = (html) => {
+  if (!html) return "";
+  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+};
+
+/**
+ * Helper to extract overview paragraphs from product HTML longDesc
+ */
+const extractOverview = (longDesc, shortDesc) => {
+  if (!longDesc) return shortDesc || "";
+  const matches = [...longDesc.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map((m) => stripHtml(m[1]))
+    .filter(Boolean);
+  if (matches.length > 0) {
+    return matches.slice(0, 2).join("\n\n");
+  }
+  return shortDesc || "";
+};
+
+/**
+ * Helper to extract applications from product HTML longDesc
+ */
+const extractApplications = (longDesc, fallback) => {
+  if (!longDesc) return fallback || "";
+  const appMatch =
+    longDesc.match(/<h3>Applications<\/h3>\s*<ul[^>]*>([\s\S]*?)<\/ul>/i) ||
+    longDesc.match(/<h3>Applications<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/i);
+  if (appMatch) {
+    const items = [...appMatch[1].matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)]
+      .map((m) => stripHtml(m[1]))
+      .filter(Boolean);
+    if (items.length > 0) return items.join(", ") + ".";
+    return stripHtml(appMatch[1]);
+  }
+  return fallback || "Rotogravure Printing, Flexographic Printing, Flexible Packaging, Converting, Slitting, Coating, Maintenance Inspection.";
+};
+
+// Aliases for historical / alternate slug support
+const SLUG_ALIASES = {
+  "led-handheld-stroboscope": "led-handheld-model-stroboscope",
+  "led-handheld-stroboscope-with-lens": "led-handheld-model-stroboscope-with-lens",
+  "led-handheld-stroboscope-lens": "led-handheld-model-stroboscope-with-lens",
+  "xenon-flash-tube-stroboscope": "xenon-flash-tube-hand-held-stroboscope",
+};
+
+/**
+ * Maps ImageTech backend product schema to the client UI schema
+ * @param {Object} p - API Product object
+ * @returns {Object} Mapped product
+ */
+export const mapApiProductToClient = (p) => {
+  if (!p) return null;
+  const slug = p.slug || "";
+  const title = p.title || p.name || "Industrial Stroboscope";
+  const shortDesc = p.shortDesc || p.shortDescription || "";
+  const longDesc = p.longDesc || p.detailedDescription || shortDesc;
+
+  const validImages = (p.images || [])
+    .filter(Boolean)
+    .map((img) => (img.startsWith("http") ? img : `https://www.stroboscopelight.com${img.startsWith("/") ? "" : "/"}${img}`));
+
+  return {
+    _id: p._id || slug,
+    id: slug,
+    slug,
+    name: title,
+    title,
+    shortDescription: shortDesc,
+    shortDesc,
+    externalLink:
+      p.externalLink ||
+      `https://www.imagetechindustries.com/products/${slug}`,
+    images: validImages.length > 0 ? validImages : ["https://www.stroboscopelight.com/heroimage.webp"],
+    overview: extractOverview(p.longDesc, shortDesc),
+    detailedDescription: longDesc,
+    longDesc: longDesc,
+    category: p.category || {
+      name: "Stroboscopes",
+      slug: "stroboscopes",
+    },
+    infoBoxes:
+      p.infoBoxes && p.infoBoxes.length > 0
+        ? p.infoBoxes
+        : [
+            { title: "Product Type", value: title, icon: "Settings" },
+            { title: "Light Source", value: title.includes("LED") ? "High-Intensity LED" : "Xenon Flash Tube", icon: "Layout" },
+            { title: "Operation", value: title.includes("Fixed") ? "Continuous 210-250V AC" : "Rechargeable Battery", icon: "Maximize" },
+            { title: "Application", value: "Printing & High-Speed Inspection", icon: "Truck" },
+          ],
+    overviewFeatures:
+      p.overviewFeatures && p.overviewFeatures.length > 0
+        ? p.overviewFeatures
+        : (p.features || []).map((kf) => {
+            const parts = kf.split(" for ");
+            return {
+              title: parts[0] || kf,
+              desc: parts[1] ? `Engineered for ${parts[1]}` : kf,
+              icon: "Target",
+            };
+          }),
+    keyFeatures:
+      p.features && p.features.length > 0
+        ? p.features
+        : p.overviewFeatures && p.overviewFeatures.length > 0
+        ? p.overviewFeatures.map((f) => (f.desc ? `${f.title}: ${f.desc}` : f.title))
+        : [],
+    features: p.features || [],
+    applications: extractApplications(
+      p.longDesc,
+      "Rotogravure Printing, Flexographic Printing, Flexible Packaging, Converting, Slitting, Coating, Maintenance Inspection."
+    ),
+    specifications: p.specifications && p.specifications.length > 0 ? p.specifications : [],
+    faqs: p.faqs && p.faqs.length > 0 ? p.faqs : [],
+    metaTitle: p.seoTitle || `${title} | ImageTech Industries`,
+    metaDescription: p.seoDescription || shortDesc,
+    keywords:
+      typeof p.seoKeywords === "string"
+        ? p.seoKeywords.split(",").map((k) => k.trim()).filter(Boolean)
+        : Array.isArray(p.seoKeywords)
+        ? p.seoKeywords
+        : ["stroboscope", title, "ImageTech Industries", "stroboscope light"],
+    ratingValue: p.ratingValue || "4.9",
+    reviewCount: p.reviewCount || "120",
+  };
+};
+
+/**
+ * Fetch all stroboscope products directly from ImageTech API dynamically
+ * @param {string} category
+ * @returns {Promise<Array>}
+ */
+export const fetchProducts = async (category = "stroboscopes") => {
+  const res = await fetch(`${IMAGETECH_API_URL}/products?category=${category}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch products from ImageTech API: ${res.status}`);
+  }
+  const allProducts = await res.json();
+  if (!Array.isArray(allProducts)) {
+    throw new Error("Invalid API response format for products");
+  }
+
+  // Filter products for Stroboscopes category
+  const stroboscopeProducts = allProducts.filter((p) => {
+    const catSlug = p.category?.slug || (typeof p.category === "string" ? p.category : "");
+    const catName = p.category?.name || "";
+    return (
+      catSlug === category ||
+      catName.toLowerCase().includes("stroboscope") ||
+      (p.slug && p.slug.toLowerCase().includes("stroboscope"))
+    );
+  });
+
+  return stroboscopeProducts.map((p) => mapApiProductToClient(p));
+};
+
+/**
+ * Fetch a single product by slug directly from ImageTech API dynamically
+ * @param {string} slug
+ * @returns {Promise<Object>}
+ */
+export const fetchProductBySlug = async (slug) => {
+  if (!slug) throw new Error("Product slug is required");
+  const resolvedSlug = SLUG_ALIASES[slug] || slug;
+
+  const res = await fetch(`${IMAGETECH_API_URL}/products/${resolvedSlug}`);
+  if (res.ok) {
+    const data = await res.json();
+    return mapApiProductToClient(data);
+  }
+
+  // Fallback: try finding product within products list if direct /products/:slug didn't match
+  const all = await fetchProducts("stroboscopes");
+  const found = all.find((p) => p.slug === resolvedSlug || p.slug === slug);
+  if (found) return found;
+
+  const error = new Error(`Product not found: ${slug}`);
+  error.status = 404;
+  throw error;
+};
+
 /* ═══════════════════════════════════════════════════════════════════════════
    2. TANSTACK QUERY KEYS
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -316,6 +503,8 @@ export const deleteSubmission = async (token, id) => {
 export const QUERY_KEYS = {
   locations: ["locations"],
   location: (slug) => ["location", slug],
+  products: (category) => ["products", category || "stroboscopes"],
+  product: (slug) => ["product", slug],
   adminStats: ["admin", "stats"],
   adminSubmissions: (params) => ["admin", "submissions", params],
   adminLocations: ["admin", "locations"],
@@ -598,3 +787,73 @@ export const useAdminDeleteLocation = (token, options = {}) => {
     ...options,
   });
 };
+
+/* ── Product Hooks (ImageTech Backend) ── */
+
+/** Hook: Fetch and cache stroboscope products dynamically from API */
+export const useProducts = (category = "stroboscopes", options = {}) => {
+  const queryClient = useQueryClient();
+  return useQuery({
+    queryKey: QUERY_KEYS.products(category),
+    queryFn: async () => {
+      const data = await fetchProducts(category);
+      if (Array.isArray(data)) {
+        // Automatically seed query cache for individual products for instant transitions
+        data.forEach((prod) => {
+          if (prod && prod.slug) {
+            queryClient.setQueryData(QUERY_KEYS.product(prod.slug), prod);
+          }
+        });
+      }
+      return data;
+    },
+    staleTime: 1000 * 60 * 15, // 15 minutes fresh
+    ...options,
+  });
+};
+
+/** Hook: Fetch and cache a single product dynamically from API */
+export const useProduct = (slug, options = {}) => {
+  const queryClient = useQueryClient();
+  const resolvedSlug = SLUG_ALIASES[slug] || slug;
+
+  return useQuery({
+    queryKey: QUERY_KEYS.product(resolvedSlug),
+    queryFn: () => fetchProductBySlug(resolvedSlug),
+    enabled: Boolean(slug),
+    initialData: () => {
+      if (!slug) return undefined;
+      // 1. Direct hit from single product cache
+      const cachedDirect = queryClient.getQueryData(QUERY_KEYS.product(resolvedSlug));
+      if (cachedDirect) return cachedDirect;
+
+      // 2. Derive from all-products query cache
+      const allProducts = queryClient.getQueryData(
+        QUERY_KEYS.products("stroboscopes")
+      );
+      if (Array.isArray(allProducts)) {
+        const found = allProducts.find((p) => p.slug === resolvedSlug || p.slug === slug);
+        if (found) return found;
+      }
+
+      return undefined;
+    },
+    staleTime: 1000 * 60 * 15,
+    ...options,
+  });
+};
+
+/** Hook: Prefetch a product into cache on hover */
+export const usePrefetchProduct = () => {
+  const queryClient = useQueryClient();
+  return (slug) => {
+    if (!slug) return;
+    const resolvedSlug = SLUG_ALIASES[slug] || slug;
+    queryClient.prefetchQuery({
+      queryKey: QUERY_KEYS.product(resolvedSlug),
+      queryFn: () => fetchProductBySlug(resolvedSlug),
+      staleTime: 1000 * 60 * 15,
+    });
+  };
+};
+

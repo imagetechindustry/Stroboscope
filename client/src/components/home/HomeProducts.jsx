@@ -1,46 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useProducts, usePrefetchProduct } from "../../services/api";
 
-const products = [
-  {
-    id: 1,
-    title: "LED Handheld Stroboscope",
-    description:
-    "Rechargeable battery-operated inspection device used to check high-speed moving and rotating parts without stopping the machine.",
-    image: "/STROBOSCOPE/1 . LED HAND MODEL STROBOSCOPE MODEL - 1/1.jpg",
-    link: "/products/led-handheld-stroboscope",
-    externalLink: "https://www.imagetechindustries.com/products/led-handheld-model-stroboscope",
-  },
-  {
-    id: 2,
-    title: "LED Handheld Stroboscope with Lens",
-    description:
-    "Rechargeable battery-operated inspection device for checking high-speed moving and rotating parts in printing and industrial machines.",
-    image: "/STROBOSCOPE/2 . LED HAND HELD STROBOSCOPE MODEL  2/11.jpg",
-    link: "/products/led-handheld-stroboscope-with-lens",
-    externalLink: "https://www.imagetechindustries.com/products/led-handheld-model-stroboscope-with-lens",
-  },
-  {
-    id: 3,
-    title: "Xenon Flash Tube Stroboscope",
-    description:
-    "Portable inspection device designed for viewing high-speed moving and rotating parts while the machine is running.",
-    image: "/STROBOSCOPE/3 . U TUBE HAND MODEL STROBOSCOPE/14.jpg",
-    link: "/products/xenon-flash-tube-hand-held-stroboscope",
-    externalLink: "https://www.imagetechindustries.com/products/xenon-flash-tube-hand-held-stroboscope",
-  },
-  {
-    id: 4,
-    title: "U Tube Fixed Model Stroboscope",
-    description:
-    "Machine-mounted inspection system designed for continuous web inspection and synchronization in printing, packaging and converting machines.",
-    image: "/STROBOSCOPE/4. FIXED MODEL STROBOSCOPE/19.jpg",
-    link: "/products/u-tube-fixed-model-stroboscope",
-    externalLink: "https://www.imagetechindustries.com/products/u-tube-fixed-model-stroboscope",
-  },
-];
+const HomeProductsSkeleton = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {[1, 2, 3, 4, 5, 6].map((i) => (
+      <div
+        key={i}
+        className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col h-full animate-pulse"
+      >
+        <div className="bg-gray-100 rounded-xl mb-6 aspect-square w-full" />
+        <div className="h-6 bg-gray-200 rounded w-3/4 mb-3" />
+        <div className="space-y-2 mb-6 flex-grow">
+          <div className="h-4 bg-gray-100 rounded w-full" />
+          <div className="h-4 bg-gray-100 rounded w-5/6" />
+        </div>
+        <div className="h-5 bg-blue-100 rounded w-28 mt-auto" />
+      </div>
+    ))}
+  </div>
+);
 
 const HomeProducts = ({ locationData }) => {
+  const locName = locationData ? locationData.name : "";
+  const locSlug = locationData ? locationData.slug : "";
+  const { data: productsList = [], isLoading } = useProducts("stroboscopes");
+  const prefetchProduct = usePrefetchProduct();
+
+  const products = productsList.map((p) => ({
+    id: p.id || p.slug,
+    slug: p.slug,
+    title: p.name || p.title,
+    description: p.shortDescription || p.shortDesc,
+    image: (p.images && p.images[0]) || "https://www.stroboscopelight.com/heroimage.webp",
+    link: locSlug ? `/${locSlug}/${p.slug}` : `/products/${p.slug}`,
+    externalLink: p.externalLink || `https://www.imagetechindustries.com/products/${p.slug}`,
+  }));
+
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,15 +47,15 @@ const HomeProducts = ({ locationData }) => {
               Our Products
             </h4>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
-              Advanced Stroboscope Solutions{locationData ? ` in ${locationData.name}` : ''}
+              Advanced Stroboscope Solutions{locName ? ` in ${locName}` : ""}
             </h2>
-            <p className="mt-4 text-lg text-gray-900 max-w-2xl">
+            <p className="mt-4 text-lg text-gray-900 max-w-2xl font-normal">
               A wide range of high-performance stroboscopes designed for visual inspection of high-speed moving and rotating parts in printing and industrial processes.
             </p>
           </div>
           <div className="mt-6 md:mt-0 shrink-0">
             <a
-              href="https://www.imagetechindustries.com/products"
+              href="https://www.imagetechindustries.com/products?category=stroboscopes"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center text-blue-600 border border-blue-200 bg-white hover:bg-blue-50 px-6 py-2.5 rounded-full font-semibold transition-colors shadow-sm"
@@ -83,49 +79,70 @@ const HomeProducts = ({ locationData }) => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow group flex flex-col h-full"
-            >
-              <a href={product.externalLink} target="_blank" rel="noopener noreferrer" className="block group/link cursor-pointer">
-                <div className="bg-gray-100 rounded-xl mb-6 overflow-hidden aspect-square flex items-center justify-center p-4">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover mix-blend-multiply group-hover/link:scale-105 transition-transform duration-500 rounded-lg shadow-sm"
-                  />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover/link:text-blue-600 transition-colors">
-                  {product.title}{locationData ? ` in ${locationData.name}` : ''}
-                </h3>
-              </a>
-              <p className="text-gray-900 text-sm mb-6 flex-grow">
-                {product.description}
-              </p>
-              <Link
-                to={locationData ? `/${locationData.slug}${product.link.replace('/products', '')}` : product.link}
-                className="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors mt-auto"
+        {isLoading ? (
+          <HomeProductsSkeleton />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl transition-shadow group flex flex-col h-full"
               >
-                View Details
-                <svg
-                  className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <Link
+                  to={product.link}
+                  onMouseEnter={() => prefetchProduct(product.slug)}
+                  className="block group/link cursor-pointer"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </Link>
-            </div>
-          ))}
-        </div>
+                  <div className="bg-gray-100 rounded-xl mb-6 overflow-hidden aspect-square flex items-center justify-center p-4">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-contain mix-blend-multiply group-hover/link:scale-105 transition-transform duration-500 rounded-lg shadow-sm"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover/link:text-blue-600 transition-colors">
+                    {product.title}{locName ? ` in ${locName}` : ""}
+                  </h3>
+                </Link>
+                <p className="text-gray-700 text-sm mb-6 flex-grow leading-relaxed font-normal">
+                  {product.description}
+                </p>
+                <div className="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
+                  <Link
+                    to={product.link}
+                    onMouseEnter={() => prefetchProduct(product.slug)}
+                    className="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors"
+                  >
+                    View Details
+                    <svg
+                      className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </Link>
+                  <a
+                    href={product.externalLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    ImageTech Spec ↗
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

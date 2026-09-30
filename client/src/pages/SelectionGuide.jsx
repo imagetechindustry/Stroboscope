@@ -25,12 +25,12 @@ export default function SelectionGuide() {
   if (inspectionMode === "handheld") {
     if (machineType === "rotary_parts" || machineType === "motor") {
       recommendedModel = "LED Handheld Model Stroboscope (Model 1)";
-      recommendedModelLink = "/products/led-handheld-stroboscope";
+      recommendedModelLink = "/products/led-handheld-model-stroboscope";
       recommendedReason =
         "Cordless, rechargeable battery operation allows technicians to safely measure RPM and inspect moving gears, pulleys, and shafts anywhere on the floor.";
     } else if (machineType === "flexo" || machineType === "labels") {
       recommendedModel = "LED Handheld Stroboscope with Built-in Magnifying Lens";
-      recommendedModelLink = "/products/led-handheld-stroboscope-with-lens";
+      recommendedModelLink = "/products/led-handheld-model-stroboscope-with-lens";
       recommendedReason =
         "The integrated optical magnifying lens lets press operators inspect fine screen dots, micro print registration, and plate lift without stopping the press.";
     } else {
@@ -478,7 +478,7 @@ const selectionFaqs = [
                     <td className="py-4 px-4">Motor RPM, Rollers, Gearboxes</td>
                     <td className="py-4 px-4 text-right">
                       <Link
-                        to="/products/led-handheld-stroboscope"
+                        to="/products/led-handheld-model-stroboscope"
                         className="text-blue-600 hover:text-blue-800 font-bold"
                       >
                         Specs &rarr;
@@ -496,7 +496,7 @@ const selectionFaqs = [
                     <td className="py-4 px-4">Print Registration & Micro-Dots</td>
                     <td className="py-4 px-4 text-right">
                       <Link
-                        to="/products/led-handheld-stroboscope-with-lens"
+                        to="/products/led-handheld-model-stroboscope-with-lens"
                         className="text-blue-600 hover:text-blue-800 font-bold"
                       >
                         Specs &rarr;
