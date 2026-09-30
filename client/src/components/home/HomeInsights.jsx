@@ -1,48 +1,91 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useBlogs } from "../../services/api";
+import BlogCard from "../blog/BlogCard";
 
-const articles = [
+const FALLBACK_ARTICLES = [
   {
-    id: 1,
+    _id: "fb-1",
+    slug: "how-to-choose-the-right-stroboscope",
     title: "How to Choose the Right Stroboscope for Your Application",
-    date: "Mar 15, 2024",
+    excerpt: "Comprehensive engineering guide to selecting LED vs Xenon stroboscopes based on press speed, flash rate (FPM), and web inspection width.",
     category: "Technical Guide",
-    image: "/CARBON STEEL  AND STAINLESS STEEL/226.jpg", // Using a product image as placeholder
+    featuredImage: "/STROBOSCOPE/1 . LED HAND MODEL STROBOSCOPE MODEL - 1/1.jpg",
+    imageAlt: "LED Handheld Stroboscope Selection",
+    publishedAt: "2024-03-15T00:00:00.000Z",
+    readTime: "5 min read",
+    author: {
+      name: "ImageTech Engineering",
+      title: "Optical Inspection Specialist",
+      avatar: "/logo.png",
+    },
   },
   {
-    id: 2,
-    title: "Improving Visual Inspection with the Right Stroboscope",
-    date: "Feb 28, 2024",
-    category: "Industry Insight",
-    image: "/STROBOSCOPE/1 . LED HAND MODEL STROBOSCOPE MODEL - 1/1.jpg", // Stroboscope image
+    _id: "fb-2",
+    slug: "improving-rotogravure-web-inspection",
+    title: "Improving Visual Inspection with High-Speed LED Stroboscopes",
+    excerpt: "How optical stop-motion freezing prevents expensive doctor blade drag lines and register shifts on rotogravure printing presses.",
+    category: "Pressroom Insights",
+    featuredImage: "/STROBOSCOPE/4. FIXED MODEL STROBOSCOPE/19.jpg",
+    imageAlt: "Rotogravure Web Inspection with Stroboscope",
+    publishedAt: "2024-02-28T00:00:00.000Z",
+    readTime: "6 min read",
+    author: {
+      name: "ImageTech Engineering",
+      title: "Print Applications Specialist",
+      avatar: "/logo.png",
+    },
   },
   {
-    id: 3,
-    title: "Advancements in LED Handheld Stroboscopes",
-    date: "Jan 15, 2024",
-    category: "Product Update",
-    image: "/STROBOSCOPE/4. FIXED MODEL STROBOSCOPE/19.jpg", // Stroboscope image
+    _id: "fb-3",
+    slug: "advancements-in-handheld-led-stroboscopes",
+    title: "Advancements in Handheld LED Stroboscopes for Industrial Quality Control",
+    excerpt: "Why modern CREE LED arrays and digital tachometer sync have made handheld stroboscopes the industry standard for plant maintenance.",
+    category: "Product Technology",
+    featuredImage: "/STROBOSCOPE/2. LED HAND MODEL WITH LENS STROBOSCOPE MODEL- 2/1.jpg",
+    imageAlt: "Handheld LED Stroboscope Technology",
+    publishedAt: "2024-01-15T00:00:00.000Z",
+    readTime: "4 min read",
+    author: {
+      name: "ImageTech Engineering",
+      title: "Product Engineer",
+      avatar: "/logo.png",
+    },
   },
 ];
 
 const HomeInsights = () => {
+  const { data, isLoading } = useBlogs({ limit: 3 });
+  const blogs =
+    data?.blogs && data.blogs.length > 0
+      ? data.blogs.slice(0, 3)
+      : FALLBACK_ARTICLES;
+
   return (
-    <section className="py-16 lg:py-24 bg-white border-t border-gray-100">
+    <section className="py-20 lg:py-28 bg-slate-50/70 border-t border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-10">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-12">
           <div>
-            <h4 className="text-blue-600 font-bold tracking-wider text-sm uppercase mb-2">
-              Latest Insights
-            </h4>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
-              Technical Knowledge for Better Performance
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+              Technical Knowledge Hub
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              Insights &amp; Articles
             </h2>
+            <p className="text-slate-600 text-base max-w-2xl mt-2 font-normal">
+              Practical guides on motion freezing, optical inspection, defect detection, and stroboscope maintenance for printing &amp; industrial operations.
+            </p>
           </div>
-          <div className="mt-4 md:mt-0 shrink-0">
-            <button className="flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors group">
-              View All Articles
+          <div className="mt-5 md:mt-0 shrink-0">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-blue-600 text-slate-800 hover:text-white font-bold text-xs border border-slate-200 shadow-2xs hover:shadow-md transition-all group"
+            >
+              <span>Explore All Articles</span>
               <svg
-                className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform"
+                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -50,38 +93,36 @@ const HomeInsights = () => {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  strokeWidth="2.5"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {articles.map((article) => (
-            <div
-              key={article.id}
-              className="flex bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all group cursor-pointer h-28"
-            >
-              <div className="w-1/3 h-full overflow-hidden shrink-0 relative bg-gray-100">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
-                />
+        {/* Loading state vs Blog Grid */}
+        {isLoading && !data ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((n) => (
+              <div
+                key={n}
+                className="bg-white rounded-3xl border border-slate-200 p-6 animate-pulse space-y-4"
+              >
+                <div className="h-48 bg-slate-100 rounded-2xl w-full" />
+                <div className="h-4 bg-slate-100 rounded w-1/3" />
+                <div className="h-6 bg-slate-100 rounded w-3/4" />
+                <div className="h-4 bg-slate-100 rounded w-full" />
               </div>
-              <div className="w-2/3 p-4 flex flex-col justify-center">
-                <h3 className="font-bold text-sm text-gray-900 leading-tight mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-                  {article.title}
-                </h3>
-                <p className="text-xs text-gray-900 font-medium truncate">
-                  {article.date} | {article.category}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogs.map((article) => (
+              <BlogCard key={article._id || article.slug} blog={article} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -18,6 +18,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "Certifications", href: "/certifications" },
+    { name: "Blog", href: "/blog" },
     { name: "Sitemap", href: "/sitemap" },
     { name: "Contact Us", href: "/contact" },
   ];
@@ -66,6 +67,12 @@ const Navbar = () => {
               className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/certifications") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
             >
               Certifications
+            </Link>
+            <Link
+              to="/blog"
+              className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/blog") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
+            >
+              Blog
             </Link>
 
             {/* Technical Guides Dropdown */}
@@ -263,6 +270,13 @@ const Navbar = () => {
               )}
             </div>
 
+            <Link
+              to="/blog"
+              onClick={() => setIsOpen(false)}
+              className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/blog") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
+            >
+              Blog & Articles
+            </Link>
             <Link
               to="/sitemap"
               onClick={() => setIsOpen(false)}

@@ -231,10 +231,28 @@ const Sitemap = () => {
               <p className="text-xs text-slate-500 mt-0.5">Sizing tools, motion physics, and printing defect troubleshooting</p>
             </div>
             <span className="text-blue-600 bg-white rounded-full px-3 py-1 text-xs font-bold border border-blue-100 shadow-sm">
-              4 Guides
+              5 Knowledge Hubs
             </span>
           </div>
-          <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <Link
+              to="/blog"
+              className="group flex flex-col justify-between bg-slate-50 border border-slate-200 hover:border-blue-500 p-4 rounded-2xl transition-all hover:shadow-md"
+            >
+              <div>
+                <span className="text-[10px] font-black text-indigo-600 uppercase tracking-wider block mb-1">Articles</span>
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  Blog & Insights
+                </h3>
+                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                  Technical guides, flash pulse setups, and high-speed web insights.
+                </p>
+              </div>
+              <span className="text-xs font-bold text-blue-600 mt-3 flex items-center gap-1">
+                Browse Blog &rarr;
+              </span>
+            </Link>
+
             <Link
               to="/selection-guide"
               className="group flex flex-col justify-between bg-slate-50 border border-slate-200 hover:border-blue-500 p-4 rounded-2xl transition-all hover:shadow-md"

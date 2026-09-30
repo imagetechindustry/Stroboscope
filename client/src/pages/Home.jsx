@@ -11,6 +11,7 @@ import HomeSelectionCalculator from "../components/home/HomeSelectionCalculator"
 import HomeWorkingPrinciple from "../components/home/HomeWorkingPrinciple";
 import HomePressApplications from "../components/home/HomePressApplications";
 import HomeTroubleshootingFinder from "../components/home/HomeTroubleshootingFinder";
+import HomeInsights from "../components/home/HomeInsights";
 import SEO from "../components/common/SEO";
 
 const Home = () => {
@@ -142,6 +143,7 @@ const Home = () => {
         <HomeWorkingPrinciple />
         <HomePressApplications />
         <HomeTroubleshootingFinder />
+        <HomeInsights />
         <HomeFAQ />
         <HomeCTA />
       </main>

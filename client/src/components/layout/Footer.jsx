@@ -187,6 +187,14 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/blog" className="hover:text-blue-600 flex items-center transition-colors group">
+                  <svg className="w-3 h-3 text-blue-600 mr-2 shrink-0 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                  </svg>
+                  Blog & Articles
+                </Link>
+              </li>
+              <li>
                 <Link to="/sitemap" className="hover:text-blue-600 flex items-center transition-colors group">
                   <svg className="w-3 h-3 text-blue-600 mr-2 shrink-0 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />

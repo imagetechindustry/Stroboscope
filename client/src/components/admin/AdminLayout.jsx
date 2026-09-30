@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAdminAuth } from "../../context/AdminAuthContext";
-import { QUERY_KEYS, fetchSubmissions, adminFetchLocations } from "../../services/api";
+import { QUERY_KEYS, fetchSubmissions, adminFetchLocations, adminFetchBlogs } from "../../services/api";
 
 const navItems = [
   {
@@ -22,6 +22,15 @@ const navItems = [
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Blog Articles",
+    path: "/admin/blogs",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
       </svg>
     ),
   },
@@ -59,6 +68,11 @@ const SidebarView = ({ admin, locationPath, onNavigate, onLogout }) => {
       queryClient.prefetchQuery({
         queryKey: [...QUERY_KEYS.adminSubmissions({ type: "contact", page: 1, limit: 10 }), admin.token],
         queryFn: () => fetchSubmissions(admin.token, { type: "contact", page: 1, limit: 10 })
+      });
+    } else if (path === "/admin/blogs") {
+      queryClient.prefetchQuery({
+        queryKey: [...QUERY_KEYS.adminBlogs({ page: 1, limit: 15 }), admin.token],
+        queryFn: () => adminFetchBlogs(admin.token, { page: 1, limit: 15 }),
       });
     } else if (path === "/admin/locations") {
       queryClient.prefetchQuery({
