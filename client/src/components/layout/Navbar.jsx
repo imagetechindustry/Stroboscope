@@ -19,7 +19,6 @@ const Navbar = () => {
     { name: "About Us", href: "/about" },
     { name: "Certifications", href: "/certifications" },
     { name: "Blog", href: "/blog" },
-    { name: "Sitemap", href: "/sitemap" },
     { name: "Contact Us", href: "/contact" },
   ];
 
@@ -128,12 +127,6 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link
-              to="/sitemap"
-              className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/sitemap") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
-            >
-              Sitemap
-            </Link>
             <Link
               to="/contact"
               className={`flex items-center px-3 py-2 text-sm font-semibold rounded-md transition-colors ${isActive("/contact") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-900 font-bold hover:text-blue-600"}`}
@@ -276,13 +269,6 @@ const Navbar = () => {
               className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/blog") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
             >
               Blog & Articles
-            </Link>
-            <Link
-              to="/sitemap"
-              onClick={() => setIsOpen(false)}
-              className={`block px-3 py-3 rounded-md text-base font-semibold ${isActive("/sitemap") ? "text-blue-600 bg-blue-50" : "text-gray-900 font-bold hover:text-blue-600 hover:bg-gray-50"}`}
-            >
-              Sitemap
             </Link>
             <Link
               to="/contact"
